@@ -48,6 +48,7 @@ class CreateDiaryView(CreateView):
                 return redirect('read_diary')     
         return render(request, self.template_name, {'form': form})
 
+
 class DetailDiaryView(DetailView):
     model = DiaryModel
     template_name = 'diary/detail_diary.html'
