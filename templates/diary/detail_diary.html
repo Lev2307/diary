@@ -8,7 +8,7 @@
     <section class="d-flex flex-column vh-100 position-relative">
         <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
             <a href="/diary/read/" class="d-flex">
-                <img class="ms-1 pe-auto" src="{% static 'media/home_images/goback.png' %}" height="50px" width="50px" alt="goBackIcon">
+                <img class="ms-1 pe-auto" src="{% static 'media/detail_images/goback.png' %}" height="50px" width="50px" alt="goBackIcon">
             </a>
             <div>
                 {% if user.is_authenticated %}
@@ -28,9 +28,13 @@
                 <div id="middle" style="overflow-y: overlay; max-width: 600px;" >
                     <p class="px-3 fst-normal text-break fs-3">{{ text }}</p>
                 </div>
-                <div>
-                    <a href="/diary/edit/{{ diary.id }}">first link</a>
-                    <a href="">second link</a>
+                <div class="d-flex justify-content-around align-items-center w-100 pt-1 border-top">
+                    <a style="height: 55px; width: 55px;" href="/diary/edit/{{ diary.id }}/">
+                        <img src="{% static 'media/detail_images/edit.png' %}" height="55" width="55" alt="Edit">
+                    </a>
+                    <a class="mt-1" style="height: 55px; width: 55px;" href="/diary/del/{{ diary.id }}/">
+                        <img src="{% static 'media/detail_images/delete.png' %}" alt="Del">
+                    </a>
                 </div>
             </div>
         </main>

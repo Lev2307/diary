@@ -9,10 +9,9 @@
 {% block content %}
     <section class="d-flex flex-column vh-100">
         <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
-            <div class="d-flex">
-                <a href="/" class="text-white display-6 text-decoration-none">My Diary</a>
-                <img class="ms-1" src="{% static 'media/home_images/diaryLogo.png' %}" alt="diary">
-            </div>
+            <a href="/diary/read/" class="d-flex">
+                <img class="ms-1 pe-auto" src="{% static 'media/detail_images/goback.png' %}" height="50px" width="50px" alt="goBackIcon">
+            </a>
             <div>
                 {% if user.is_authenticated %}
                     <span class="text-light m-5 fs-3">{{ user.username }}</span>

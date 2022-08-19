@@ -1,8 +1,9 @@
+from audioop import reverse
 from urllib import request
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
 from .models import DiaryModel
 from django.views.generic import CreateView, UpdateView
 from .forms import CreateDiaryForm, EditDiaryForm
@@ -54,7 +55,7 @@ class DetailDiaryView(DetailView):
     def get(self, request, pk, *args, **kwargs):
         diary = DiaryModel.objects.get(id=pk)
         text = diary.text
-        day = diary.day_of_the_week
+        day = diary.day_of_the_week.capitalize()
         date = diary.date
         return render(request, self.template_name, {'diary': diary, 'text': text, 'day': day, 'date': date})
 
@@ -97,4 +98,9 @@ class EditDiaryView(UpdateView):
 #             new_model.save()
 #             return redirect('home')
 #     return render(request, 'diary/create_diary.html', {'form': form})
-        
+
+class DeleteDiaryView(DeleteView):
+    model = DiaryModel
+    success_url = reverse_lazy('home')
+    template_name = 'diary/confirm_delete.html'
+    context_object_name = 'diary'

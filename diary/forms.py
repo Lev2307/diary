@@ -35,7 +35,7 @@ class EditDiaryForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('text', css_class='form-control mb-2 resizable', PlaceHolder='record your memories here...'),
             Field('day_of_the_week', css_class='form-select mb-2'),
-            ButtonHolder(Submit('submit', 'Submit', css_class='bg-warning'))
+            ButtonHolder(Submit('submit', 'Submit', css_class='bg-warning border-0'))
         )
     class Meta:
         model = DiaryModel
