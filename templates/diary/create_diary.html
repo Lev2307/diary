@@ -8,20 +8,7 @@
 
 {% block content %}
     <section class="d-flex flex-column vh-100">
-        <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
-            <div class="d-flex">
-                <a href="/" class="text-white display-6 text-decoration-none">My Diary</a>
-                <img class="ms-1" src="{% static 'media/home_images/diaryLogo.png' %}" alt="diary">
-            </div>
-            <div>
-                {% if user.is_authenticated %}
-                    <span class="text-light m-5 fs-3">{{ user.username }}</span>
-                    <a class="text-light text-decoration-none fs-4" href="/auth/logout">Log Out</a>
-                {% else %}
-                    <a class="text-light text-decoration-none fs-4" href="/auth/login/">Login</a>
-                {% endif %}
-            </div>
-        </header>
+        {% include 'navbar.html' %}
         <div style="height: 500px; width: 500px;  border-radius: 15px;" class="d-flex flex-column justify-content-center align-items-center shadow p-4 mb-5 bg-white position-absolute top-50 start-50 translate-middle">
             <div class="w-100">
                 {% crispy form %}

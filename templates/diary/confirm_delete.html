@@ -6,19 +6,7 @@
 
 {% block content %}
     <section class="d-flex flex-column vh-100">
-        <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
-            <a href="/diary/read/" class="d-flex">
-                <img class="ms-1 pe-auto" src="{% static 'media/detail_images/goback.png' %}" height="50px" width="50px" alt="goBackIcon">
-            </a>
-            <div>
-                {% if user.is_authenticated %}
-                    <span class="text-light m-5 fs-3">{{ user.username }}</span>
-                    <a class="text-light text-decoration-none fs-4" href="/auth/logout">Log Out</a>
-                {% else %}
-                    <a class="text-light text-decoration-none fs-4" href="/auth/login/">Login</a>
-                {% endif %}
-            </div>
-        </header>
+        {% include 'navbar.html' %}
         <div>
             <div style="height: 500px; width: 500px;  border-radius: 15px;" class="d-flex flex-column justify-content-center align-items-center shadow p-4 mb-5 bg-white position-absolute top-50 start-50 translate-middle">
                 <div class="h-25 w-100 d-flex justify-content-between align-items-center">

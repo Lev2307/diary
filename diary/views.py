@@ -65,6 +65,7 @@ class EditDiaryView(UpdateView):
     form_class = EditDiaryForm
     template_name = 'diary/edit_diary.html'
     success_url = reverse_lazy('read_diary')
+    context_object_name = 'diary'
 
     def post(self, request, pk, *args, **kwargs):
         try:
@@ -85,7 +86,7 @@ class EditDiaryView(UpdateView):
         else:
             form = EditDiaryForm(instance=obj)
 
-        return render(request, self.template_name, {'single_object': obj, 'form': form})
+        return render(request, self.template_name, {'form': form})
 
 # def createDiaryView(request, *args, **kwargs):
 #     model = DiaryModel

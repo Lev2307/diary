@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
+        <div class="d-flex">
+            <a href="/" class="text-white display-6 text-decoration-none">My Diary</a>
+            <img class="ms-1" src="{% static 'media/home_images/diaryLogo.png' %}" alt="diary">
+        </div>
+        <div>
+            <ul class="menu bg-primary">
+                {% if user.is_authenticated %}
+                    <span class="text-light mb-3 fs-2">{{ user.username }}</span>
+                    <a class="text-light mb-3 fs-3" href="">Settings</a>
+                    <a class="text-light mb-3 fs-3" href="/auth/logout">Log Out</a>
+                {% else %}
+                    <a class="text-light fs-3" href="/auth/login/">Login</a>
+                    <a class="text-light fs-3" href="/auth/register/">Registration</a>
+                {% endif %}
+              </ul>
+              <button id="hamburger" class="border-0 bg-primary">
+                <i style="color: #fff;" class="menuIcon material-icons">☰</i>
+                <i style="color: #fff;" class="closeIcon material-icons">&#x2715;</i>
+            </button>
+        </div>
+    </header>
+<script>
+    const menu = document.querySelector(".menu");
+    const menuItems = document.querySelectorAll(".menuItem");
+    const hamburger = document.getElementById("hamburger");
+    const closeIcon= document.querySelector(".closeIcon");
+    const menuIcon = document.querySelector(".menuIcon");
+
+    function toggleMenu() {
+    if (menu.classList.contains("showMenu")) {
+        menu.classList.remove("showMenu");
+        closeIcon.style.display = "none";
+        menuIcon.style.display = "block";
+    } else {
+        menu.classList.add("showMenu");
+        closeIcon.style.display = "block";
+        closeIcon.id = "close";
+        menuIcon.style.display = "none";
+    }
+    }
+    menuItems.forEach( 
+        function(menuItem) { 
+            menuItem.addEventListener("click", toggleMenu);
+        }
+    )
+
+    hamburger.addEventListener("click", toggleMenu);
+</script>
+{% endblock content %}

@@ -11,12 +11,20 @@
                 <img class="ms-1 pe-auto" src="{% static 'media/detail_images/goback.png' %}" height="50px" width="50px" alt="goBackIcon">
             </a>
             <div>
-                {% if user.is_authenticated %}
-                    <span class="text-light m-5 fs-3">{{ user.username }}</span>
-                    <a class="text-light text-decoration-none fs-4" href="/auth/logout">Log Out</a>
-                {% else %}
-                    <a class="text-light text-decoration-none fs-4" href="/auth/login/">Login</a>
-                {% endif %}
+                <ul class="menu bg-primary">
+                    {% if user.is_authenticated %}
+                        <span class="text-light mb-3 fs-2">{{ user.username }}</span>
+                        <a class="text-light mb-3 fs-3" href="">Settings</a>
+                        <a class="text-light mb-3 fs-3" href="/auth/logout">Log Out</a>
+                    {% else %}
+                        <a class="text-light fs-3" href="/auth/login/">Login</a>
+                        <a class="text-light fs-3" href="/auth/register/">Registration</a>
+                    {% endif %}
+                  </ul>
+                  <button id="hamburger" class="border-0 bg-primary">
+                    <i style="color: #fff;" class="menuIcon material-icons">☰</i>
+                    <i style="color: #fff;" class="closeIcon material-icons">&#x2715;</i>
+                </button>
             </div>
         </header>
         <main class="d-flex justify-content-center align-items-center h-100">
@@ -39,4 +47,31 @@
             </div>
         </main>
     </section>
+<script>
+        const menu = document.querySelector(".menu");
+        const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger = document.getElementById("hamburger");
+        const closeIcon= document.querySelector(".closeIcon");
+        const menuIcon = document.querySelector(".menuIcon");
+    
+        function toggleMenu() {
+        if (menu.classList.contains("showMenu")) {
+            menu.classList.remove("showMenu");
+            closeIcon.style.display = "none";
+            menuIcon.style.display = "block";
+        } else {
+            menu.classList.add("showMenu");
+            closeIcon.style.display = "block";
+            closeIcon.id = "close";
+            menuIcon.style.display = "none";
+        }
+        }
+        menuItems.forEach( 
+            function(menuItem) { 
+                menuItem.addEventListener("click", toggleMenu);
+            }
+        )
+    
+        hamburger.addEventListener("click", toggleMenu);
+</script>
 {% endblock %}

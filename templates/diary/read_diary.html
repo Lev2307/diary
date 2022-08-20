@@ -6,20 +6,7 @@
 
 {% block content %}
     <section class="vh-100 overflow-hidden d">
-        <header class="bg-primary d-flex justify-content-between p-1 align-items-center">
-            <div class="d-flex">
-                <a href="/" class="text-white display-6 text-decoration-none">My Diary</a>
-                <img class="ms-1" src="{% static 'media/home_images/diaryLogo.png' %}" alt="diary">
-            </div>
-            <div>
-                {% if user.is_authenticated %}
-                    <span class="text-light m-5 fs-3">{{ user.username }}</span>
-                    <a class="text-light text-decoration-none fs-4" href="/auth/logout">Log Out</a>
-                {% else %}
-                    <a class="text-light text-decoration-none fs-4" href="/auth/login/">Login</a>
-                {% endif %}
-            </div>
-        </header>
+        {% include 'navbar.html' %}
         <main class="container h-100 d-flex justify-content-center align-items-center">
             <div style="border-radius: 15px;" class="bg-white d-flex flex-column h-75 w-50 position-relative">
                 {% if diarys %}
