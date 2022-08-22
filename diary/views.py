@@ -8,6 +8,7 @@ from .models import DiaryModel
 from django.views.generic import CreateView, UpdateView
 from .forms import CreateDiaryForm, EditDiaryForm
 from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomeView(View):
     model = DiaryModel
@@ -16,7 +17,7 @@ class HomeView(View):
         user = request.user
         return render(request, self.template_name, {'user': user})
 
-class ReadDiaryView(ListView):
+class ReadDiaryView(ListView, LoginRequiredMixin):
     model = DiaryModel
     template_name = 'diary/read_diary.html'
     paginate_by = 4
@@ -26,7 +27,7 @@ class ReadDiaryView(ListView):
         user = self.request.user
         return DiaryModel.objects.filter(user=self.request.user)
 
-class CreateDiaryView(CreateView):
+class CreateDiaryView(CreateView, LoginRequiredMixin):
     model = DiaryModel
     form_class = CreateDiaryForm
     template_name = 'diary/create_diary.html'
@@ -49,7 +50,7 @@ class CreateDiaryView(CreateView):
         return render(request, self.template_name, {'form': form})
 
 
-class DetailDiaryView(DetailView):
+class DetailDiaryView(DetailView, LoginRequiredMixin):
     model = DiaryModel
     template_name = 'diary/detail_diary.html'
 
@@ -60,7 +61,7 @@ class DetailDiaryView(DetailView):
         date = diary.date
         return render(request, self.template_name, {'diary': diary, 'text': text, 'day': day, 'date': date})
 
-class EditDiaryView(UpdateView):
+class EditDiaryView(UpdateView, LoginRequiredMixin):
     model = DiaryModel
     form_class = EditDiaryForm
     template_name = 'diary/edit_diary.html'
@@ -87,6 +88,12 @@ class EditDiaryView(UpdateView):
             form = EditDiaryForm(instance=obj)
 
         return render(request, self.template_name, {'form': form})
+        
+class DeleteDiaryView(DeleteView, LoginRequiredMixin):
+    model = DiaryModel
+    success_url = reverse_lazy('home')
+    template_name = 'diary/confirm_delete.html'
+    context_object_name = 'diary'
 
 # def createDiaryView(request, *args, **kwargs):
 #     model = DiaryModel
@@ -100,9 +107,3 @@ class EditDiaryView(UpdateView):
 #             new_model.save()
 #             return redirect('home')
 #     return render(request, 'diary/create_diary.html', {'form': form})
-
-class DeleteDiaryView(DeleteView):
-    model = DiaryModel
-    success_url = reverse_lazy('home')
-    template_name = 'diary/confirm_delete.html'
-    context_object_name = 'diary'

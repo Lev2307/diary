@@ -15,9 +15,10 @@
             <div>
                 <ul class="menu bg-primary">
                     {% if user.is_authenticated %}
-                        <span class="text-light mb-3 fs-2">{{ user.username }}</span>
-                        <a class="text-light mb-3 fs-3" href="">Settings</a>
                         <a class="text-light mb-3 fs-3" href="/auth/logout">Log Out</a>
+                        <div class="position-absolute bottom-0 start-50 translate-middle-x">
+                            <span class="text-light ms-5 fs-2">{{ user.username }}</span>
+                        </div>
                     {% else %}
                         <a class="text-light fs-3" href="/auth/login/">Login</a>
                         <a class="text-light fs-3" href="/auth/register/">Registration</a>
