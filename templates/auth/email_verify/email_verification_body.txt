@@ -1,0 +1,2 @@
+You are almost there, {{ user.username }}!
+Here`s your generated code to verify your account: {{ code }}
