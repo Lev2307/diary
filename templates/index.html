@@ -8,6 +8,17 @@
         
         {% if user.is_authenticated %}
             <main>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-block alert-success">
+                            <ul class="m-0">
+                                <li class="fs-5">
+                                    {{ message }}
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <a href="/diary/read/" class="text-light fs-2">Your Diary`s -></a>
                 </div>

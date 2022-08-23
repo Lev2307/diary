@@ -51,7 +51,7 @@ class LoginView(LoginView):
             email_adress = EmailMessage(email_subject, verificate_message, to=[email])
             email_adress.content_subtype = "html"
             email_adress.send()
-            messages.add_message(self.request, messages.WARNING, f"It looks like you`re trying to sign in from a different location. As an added security measure, please enter the 6 digit code we sent to {new_email}")
+            messages.add_message(self.request, messages.WARNING, f"It looks like you`re trying to log in from a different location or a new device. As an added security measure, please enter the 6 digit code we sent to {new_email}")
             return HttpResponseRedirect(f'/auth/verify_acc/{verify.id}/')
         else:
             auth_login(self.request, form.get_user())
@@ -74,7 +74,10 @@ class VerifyAccountView(UpdateView):
             code = form.cleaned_data.get('code')
             if model.code == code:
                 auth_login(request, model.user)
-                return redirect('home')
+                messages.add_message(self.request, messages.SUCCESS, f'You successfully logged in as {model.user.username}')
+                return HttpResponseRedirect(self.success_url)
+            else:
+                messages.add_message(self.request, messages.WARNING, f'Sorry, but this code is incorrect. Please, try again.')
         return render(request, self.template_name, {'form': form}) 
 
     def get(self, request, verify_id, *args, **kwargs):
