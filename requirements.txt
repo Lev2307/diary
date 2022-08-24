@@ -3,3 +3,4 @@ Django==4.1
 django-crispy-forms==1.14.0
 sqlparse==0.4.2
 tzdata==2022.1
+whitenoise==6.2.0

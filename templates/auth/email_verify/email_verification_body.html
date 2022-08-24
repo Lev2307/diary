@@ -6,9 +6,47 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
   </head>
-      <body style="background-color:white;">
-        <table>
-          <p>{{ Code }}</p>
-        </table>
+      <body>
+        <div style="background-image:none;background-repeat:repeat;">
+          <table style="background-color: #fff;background-image: none;background-repeat: repeat;background-position: top left; width: 100%;">
+            <tbody>
+              <tr>
+                  <h1 style="color:#333;font-size: calc(1.375rem + 1.5vw);font-weight: 300;line-height: 1.2;">MyDairy</h1>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <h3 style="text-align: center; color: #1f4287;">Hello, {{ user.username }}!</h3>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <h2 style="text-align: center; font-weight: 300;">To complete your Log In, enter the following code:</h2>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <div style="background: #faf9fa;
+                border: 1px solid #dad8de;
+                text-align: center;
+                padding: 5px;
+                margin: 0 0 5px 0;
+                font-size: 24px;
+                line-height: 1.5;">{{ code }}</div>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <div style="    padding: 0 0 20px 0;
+                font-size: 16px;
+                line-height: 2;">
+                Thank you,
+                <br>
+                MyDiary Support ;>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+      </div>
       </body>
   </html>

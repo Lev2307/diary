@@ -43,8 +43,8 @@ class LoginView(LoginView):
             position_of_at = email.find('@')
             email = email.lower()
             new_email =  email[0]+'*****'+email[position_of_at-1:].lower()
-            email_subject = 'Please, verificate your email'
-            verificate_message = render_to_string('auth/email_verify/email_verification_body.txt', {
+            email_subject = 'Here`s your verify code to log in MyDairy'
+            verificate_message = render_to_string('auth/email_verify/email_verification_body.html', {
                                                                                                 'user': user,
                                                                                                 'code': verify.code,
                                                                                                 })
