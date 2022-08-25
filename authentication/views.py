@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
@@ -37,7 +38,7 @@ class LoginView(LoginView):
         for _ in range(6):
             code += random.choice(numbers)
         if not VerifyAccModel.objects.filter(ip_address=ip_address, user=form.get_user()).exists():
-            verify = VerifyAccModel.objects.create(code=code, ip_address=ip_address, user=form.get_user(), verified=True)
+            verify = VerifyAccModel.objects.create(code=code, ip_address=ip_address, user=form.get_user())
             verify.save()
             email = user.email
             position_of_at = email.find('@')
