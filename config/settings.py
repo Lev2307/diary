@@ -45,6 +45,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,7 +129,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "staticbase",
 ]
 
-STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'staticbase' / 'media'
@@ -147,3 +148,8 @@ EMAIL_HOST_USER = 'mydairy.noreply@gmail.com'
 EMAIL_HOST_PASSWORD = 'fexegzeugaqptoaa'
 
 # EMAIL_HOST_PASSWORD = 'e3x1&ffyzoph'
+
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
