@@ -25,9 +25,11 @@ SECRET_KEY = 'django-insecure-o1k^64r(ut0c@cgorenjkd^=scc8bs_85z=gy_ob8mlz5#$*j!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['intense-woodland-02603.herokuapp.com']
+ALLOWED_HOSTS = ['intense-woodland-02603.herokuapp.com', '127.0.0.1']
 
-
+MIDDLEWARE_CLASSES = (
+    'django_user_agents.middleware.UserAgentMiddleware',
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'diary',
     'crispy_forms',
+    'django_user_agents',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

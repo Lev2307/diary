@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import VerifyAccModel
+from .models import VerifyDeviceModel
 
-admin.site.register(VerifyAccModel)
+admin.site.register(VerifyDeviceModel)

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, ButtonHolder, Field
 from django.utils.translation import gettext as _
-from .models import VerifyAccModel
+from .models import VerifyDeviceModel
 
 
 class RegisterForm(UserCreationForm):
@@ -68,7 +68,7 @@ class LoginForm(AuthenticationForm):
             params={'username': self.username_field.verbose_name},
         )
     
-class VerifyAccForm(forms.ModelForm):
+class VerifyDeviceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -79,5 +79,5 @@ class VerifyAccForm(forms.ModelForm):
             ButtonHolder(Submit('submit', 'Submit', css_class='mt-2'))
     )
     class Meta:
-        model = VerifyAccModel
+        model = VerifyDeviceModel
         fields = ['code']
